@@ -40,12 +40,12 @@ const routes = [
     component: CreatePlaylist,
     beforeEnter: requireAuth
   },
+  //path: '/wwe/:toUrl/wrestlemania',
   {
     path: '/wwe/:toUrl/wrestlemania',
     name: 'PlaylistDetails',
     component: PlaylistDetails,
     props: true,
-    params: true,
     beforeEnter: requireAuth,
   },
 ]

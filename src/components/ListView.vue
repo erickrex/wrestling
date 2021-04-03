@@ -1,6 +1,6 @@
 <template>
   <div v-for="playlist in playlists" :key="playlist.id">
-    <router-link :to="{ name: 'PlaylistDetails', params: { toUrl : playlist.userName},  props: {id : playlist.id}}">
+    <router-link :to="{ name: 'PlaylistDetails', params: { toUrl : playlist.userName, id : playlist.id}}">
       <div class="single">
         <div class="thumbnail">
           <img :src="playlist.coverUrl">
@@ -19,7 +19,7 @@
 
 <script>
 export default {
-  props: ['playlists'],
+  props: ['playlists']
 }
 </script>
 

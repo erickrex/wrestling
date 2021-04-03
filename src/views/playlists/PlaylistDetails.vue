@@ -29,9 +29,9 @@ import getUser from '@/composables/getUser'
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 export default {
-  props: ['id'],
-  params: ['toUrl'],
+  props: ['id', 'toUrl'],
   setup(props) {
+      console.log(props.id)
     const { error, document: playlist } = getDocument('playlists', props.id)
     const { user } = getUser()
     const { deleteDoc } = useDocument('playlists', props.id)

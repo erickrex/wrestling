@@ -30,10 +30,5 @@ export default {
 </script>
 
 <style scoped>
-.button {
-    color: #f0eeaf;
-  }
-.button:hover {
-    color: white;
-  }
+
 </style>
