@@ -1,4 +1,6 @@
-# wrestlingpredictions
+# wrestling
+
+App to make predictions about the winners of the matches at Wrestlemania 2021
 
 ## Project setup
 ```

@@ -10,7 +10,7 @@
   --warning: #da0f41;
   --pornblack: #000;
   --pornyellow: #f90;
-  
+
 
 }
 
@@ -37,6 +37,7 @@ button, .btn {
   font-weight: 600;
   cursor: pointer;
   display: inline-block;
+  color: #f0eeaf;
 }
 button:hover, .btn:hover {
   background: var(--primary);

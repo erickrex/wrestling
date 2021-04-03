@@ -1,9 +1,10 @@
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
+import 'firebase/storage'
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-let firebaseConfig = {
+const firebaseConfig = {
     apiKey: "AIzaSyCv6n-_I2GYAB_bEEBUh5R6IJ3q-RU0h2M",
     authDomain: "wrestling-d4cdd.firebaseapp.com",
     projectId: "wrestling-d4cdd",
@@ -13,11 +14,13 @@ let firebaseConfig = {
   };
 
 //initializing firebase
-const firebaseApp = firebase.initializeApp(firebaseConfig)
+firebase.initializeApp(firebaseConfig)
 
 
 //initializing firestore service
 const projectFirestore = firebase.firestore()
 const timestamp = firebase.firestore.FieldValue.serverTimestamp
+const projectAuth = firebase.auth()
+const projectStorage = firebase.storage()
 
-export {projectFirestore, timestamp, firebaseApp}
+export {projectFirestore, projectAuth, timestamp, projectStorage}
