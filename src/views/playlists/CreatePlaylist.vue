@@ -43,14 +43,15 @@ export default {
           userId: user.value.uid,
           userName: user.value.displayName,
           coverUrl: url.value,
-          filePath: filePath.value, // so we can delete it later
+          filePath: filePath.value,
+          //all fire collections gotta have songs
           songs: [],
           extraComments: [],
           createdAt: timestamp()
         })
         isPending.value = false
         if (!error.value) {
-          router.push({ name: 'PlaylistDetails', params: { id: res.id , toUrl: user.displayName }})
+          router.push({ name: 'PlaylistDetails', params: { id: res.id , toUrl: user.value.displayName }})
         }
       }
     }
