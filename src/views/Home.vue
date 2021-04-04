@@ -2,7 +2,7 @@
   <div class="home">
     <div v-if="error" class="error">Could not fetch the data</div>
     <div v-if="documents">
-      <ListView :playlists="documents" />
+      <ListView :predictions="documents" />
     </div>
   </div>
 </template>
@@ -15,7 +15,8 @@ export default {
   name: 'Home',
   components: { ListView },
   setup() {
-    const { error, documents } = getCollection('playlists')
+    const { error, documents } = getCollection('predictions', 'g601rrraCBPkurhL0N02')
+    console.log(documents)
     return { error, documents }
   }
 }

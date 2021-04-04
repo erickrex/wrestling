@@ -1,16 +1,16 @@
 <template>
-  <div v-for="playlist in playlists" :key="playlist.id">
-    <router-link :to="{ name: 'PlaylistDetails', params: { toUrl : playlist.userName, id : playlist.id}}">
+  <div v-for="singleprediction in predictions" :key="singleprediction.id">
+    <router-link :to="{ name: 'PlaylistDetails', params: { toUrl : singleprediction.userName, id : singleprediction.id}}">
       <div class="single">
         <div class="thumbnail">
-          <img :src="playlist.coverUrl">
+          <img :src="singleprediction.coverUrl">
         </div>
         <div class="info">
-          <h3>{{ playlist.title }}</h3>
-          <p>created by {{ playlist.userName }}</p>
+          <h3>{{ singleprediction.match }}</h3>
+          <p>created by {{ singleprediction.userName }}</p>
         </div>
         <div class="song-number">
-          <p>{{ playlist.songs.length }} songs</p>
+          <p>{{ singleprediction.extraComments.length }} songs</p>
         </div>
       </div>
     </router-link>
@@ -19,7 +19,10 @@
 
 <script>
 export default {
-  props: ['playlists']
+  props: ['predictions'],
+  setup(){
+    console.log(predictions)
+  }
 }
 </script>
 
