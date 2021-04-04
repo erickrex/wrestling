@@ -1,14 +1,14 @@
 import { assign, createMachine } from "xstate";
 
 const addPicked = assign({
-  results: (ctx, event) => ctx.results.add(event.partialwrestler)
+  results: (ctx, event) => ctx.results.add(event.winner)
 });
 
 const exemplary = () => {
   console.log("ya pues compa");
 }
 
-const Questionnaire = createMachine(
+const Card = createMachine(
   {
     id: "step",
     initial: "one",
@@ -181,4 +181,4 @@ const Questionnaire = createMachine(
   }
 );
 
-export default Questionnaire;
+export default Card;

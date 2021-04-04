@@ -5,7 +5,7 @@
       <h1><router-link :to="{ name: 'Home' }">Wrestling Predictions</router-link></h1>
       <div class="links">
         <div v-if="user">
-          
+          <router-link :to="{ name: 'MakePredictions' }">Predictions</router-link>
           <router-link :to="{ name: 'CreatePlaylist' }">Create Playlist</router-link>
           <router-link :to="{ name: 'UserPlaylists' }">My Playlists</router-link>
           <span v-if='user' class="hello">Hola {{ user.displayName }}, welcome!</span>
