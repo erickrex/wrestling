@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { ref, reactive } from 'vue'
+import { ref, reactive, watchEffect } from 'vue'
 import useStorage from '@/composables/useStorage'
 // import useCollection from '@/composables/useCollection'
 // import getUser from '@/composables/getUser'
@@ -67,11 +67,19 @@ export default {
     //     }
 
     const userPrediction = reactive([])
-    console.log(state.value.meta[`step.${state.value.value}`].match)
-    const contenders = state.value.meta[`step.${state.value.value}`].optionsAvailable
-    console.log(contenders)
+    let currentMatch;
+    //const ref = ()
+    watchEffect(() => {
+      currentMatch = {match : state.value.meta[`step.${state.value.value}`].match, optionsAvailable: state.value.meta[`step.${state.value.value}`].optionsAvailable}
+      
+      currentMatch.optionsAvailable.forEach (element => console.log('internal' + element.wrestler))
+          
+      
+      
+      })
+
+   //console.log(contenders)
  
-    console.log(state.value.meta[`step.${state.value.value}`].wrestler)
     const goForward = () => {
       send("NEXT");
       userPrediction.push(
@@ -79,8 +87,9 @@ export default {
         picked.value
       )
     
-      console.log(picked.value)
-      console.log(state.value.meta[`step.${state.value.value}`].match);
+      // console.log('PICKED' + picked.value)
+      // console.log('METAMATCH' + state.value.meta[`step.${state.value.value}`].match);
+      // console.log('AAMatch' + AAMatch)
     };
 
     
