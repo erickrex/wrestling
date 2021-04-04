@@ -38,9 +38,9 @@ export default {
   props: ['id', 'toUrl'],
   components: { AddSong },
   setup(props) {
-    const { error, document: playlist } = getDocument('playlists', props.id)
+    const { error, document: playlist } = getDocument('predictions', props.id)
     const { user } = getUser()
-    const { deleteDoc, updateDoc } = useDocument('playlists', props.id)
+    const { deleteDoc, updateDoc } = useDocument('predictions', props.id)
     const { deleteImage } = useStorage()
     const router = useRouter()
     const ownership = computed(() => {

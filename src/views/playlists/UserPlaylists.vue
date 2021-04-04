@@ -1,7 +1,8 @@
 <template>
-  <div class="user-predictions">
+  <div class="user-playlists">
     <h2>My predictions</h2>
     <div v-if="predictions">
+      <h2>KO</h2>
       <ListView :predictions="predictions" />
     </div>
     <router-link :to="{ name: 'CreatePlaylist' }" class="btn">Create a New Playlist</router-link>
@@ -17,10 +18,11 @@ export default {
   setup() {
     const { user } = getUser()
     const { documents: predictions } = getCollection(
-      'predictions', 
-      ['userId', '==', user.value.uid]
-    )
-    return { predictions }
+      'predictions', ['userId', '==', user.value.uid])
+    console.log(user.value.uuid)
+  // const { error, documents : predictions } = getCollection('predictions')
+    
+    return { predictions, user }
   }
 }
 </script>

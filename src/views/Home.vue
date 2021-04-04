@@ -15,7 +15,7 @@ export default {
   name: 'Home',
   components: { ListView },
   setup() {
-    const { error, documents } = getCollection('predictions', 'g601rrraCBPkurhL0N02')
+    const { error, documents } = getCollection('predictions')
     console.log(documents)
     return { error, documents }
   }

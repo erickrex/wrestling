@@ -19,10 +19,7 @@
 
 <script>
 export default {
-  props: ['predictions'],
-  setup(){
-    console.log(predictions)
-  }
+  props: ['predictions']
 }
 </script>
 

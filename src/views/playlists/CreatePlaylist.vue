@@ -52,6 +52,7 @@ export default {
         if (!error.value) {
           router.push({ name: 'PlaylistDetails', params: { id: res.id , toUrl: res.userName }})
         }
+        console.log(res.id + res.userName)
       }
     }
     // allowed file types
