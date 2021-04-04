@@ -6,6 +6,8 @@
       <div class="links">
         <div v-if="user">
           <router-link :to="{ name: 'CreatePlaylist' }">Create Playlist</router-link>
+          <router-link :to="{ name: 'UserPlaylists' }">My Playlists</router-link>
+          <span class="hello">Hola {{ user.displayName }}, welcome!</span>
           <button @click="handleClick">Logout</button>
         </div>
         <div v-else>
@@ -18,18 +20,17 @@
 </template>
 
 <script>
-// challenge
-//   - only show the logout button if we are logged in
-//   - only show the signup and login links if we are not logged in
-//   - use the getUser composable to help
+
 import getUser from '../composables/getUser'
 import useLogout from '../composables/useLogout'
 import { useRouter } from 'vue-router'
 export default {
   setup() {
+      
     const { user } = getUser()
     const { logout } = useLogout()
     const router = useRouter()
+    console.log(user.value.displayName)
     const handleClick = async () => {
       await logout()
       console.log('logged out')
@@ -48,6 +49,7 @@ export default {
   }
   nav {
     display: flex;
+
     align-items: center;
     max-width: 1200px;
     margin: 0 auto;
@@ -61,8 +63,18 @@ export default {
   nav .links {
     margin-left: auto;
   }
+
   nav .links a, button {
-    margin-left: 16px;
-    font-size: 14px;
+    margin: 1rem;
+    font-size: 1.2rem;
+  }
+
+  nav .links a:hover, button:hover {
+    color: red;
+    font-size: 1.5rem;
+  }
+
+  .hello{
+    font-size: 1.3rem;
   }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <form @submit.prevent="handleSubmit">
-      <h4>Create a New Playlist</h4>
+      <h4>Make your predictions</h4>
       <input type="text" required placeholder="Playlist title" v-model="title">
       <textarea required placeholder="Playlist description..." v-model="description"></textarea>
       <!-- upload playlist image -->
@@ -45,11 +45,12 @@ export default {
           coverUrl: url.value,
           filePath: filePath.value, // so we can delete it later
           songs: [],
+          extraComments: [],
           createdAt: timestamp()
         })
         isPending.value = false
         if (!error.value) {
-          router.push({ name: 'PlaylistDetails', params: { id: res.id }})
+          router.push({ name: 'PlaylistDetails', params: { id: res.id , toUrl: user.displayName }})
         }
       }
     }
@@ -74,7 +75,7 @@ export default {
 
 <style>
   form {
-    background: white;
+    background: black;
   }
   input[type="file"] {
     border: 0;

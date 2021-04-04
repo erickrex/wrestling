@@ -11,14 +11,17 @@ const signup = async (email, password, displayName) => {
   try {
     const res = await projectAuth.createUserWithEmailAndPassword(email, password)
     if (!res) {
-      throw new Error('Could not complete signup')
+      throw new Error('Couldnt complete signup')
     }
     await res.user.updateProfile({ displayName })
     await res.user.sendEmailVerification().then(function() {
          console.log("Email sent.") 
        }).catch(function(error) {
-         // An error happened.
-       });
+    console.log(err.message)
+
+    error.value = err.message
+    isPending.value = false
+    });
     //console.log(res.user)
     error.value = null
     isPending.value = false
@@ -26,7 +29,7 @@ const signup = async (email, password, displayName) => {
     return res
   }
   catch(err) {
-    console.log("que" + err.message)
+    console.log("Not signed because" + err.message)
     error.value = err.message
     isPending.value = false
   }

@@ -10,6 +10,7 @@
 <script>
 import ListView from '../components/ListView.vue'
 import getCollection from '../composables/getCollection'
+
 export default {
   name: 'Home',
   components: { ListView },
