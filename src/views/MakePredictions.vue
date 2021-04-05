@@ -2,7 +2,7 @@
   <div>
     <h1>Pick your winners</h1>
     <div class="selector-container">
-      <h2>{{ state.meta[`step.${state.value}`].match }}</h2>
+      <h2>{{ currentMatch.match }}</h2>
       <form className="selector">
         <div
           class="option"
@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { ref, reactive, watchEffect } from 'vue'
+import { ref, watchEffect } from 'vue'
 import useStorage from '@/composables/useStorage'
 // import useCollection from '@/composables/useCollection'
 // import getUser from '@/composables/getUser'
@@ -65,15 +65,15 @@ export default {
     //     },
     //     {intercontinental: {winer: 'Big E', loser: 'Apollo'}
     //     }
-    watchEffect(() => console.log(picked.value))
+    watchEffect(() => console.log(currentMatch))
     let userPrediction = []
     console.log(userPrediction)
-    let currentMatch;
+    const currentMatch = ref({});
     //const ref = ()
     watchEffect(() => {
-      currentMatch = {match : state.value.meta[`step.${state.value.value}`].match, optionsAvailable: state.value.meta[`step.${state.value.value}`].optionsAvailable}
+      currentMatch.value = {match : state.value.meta[`step.${state.value.value}`].match, optionsAvailable: state.value.meta[`step.${state.value.value}`].optionsAvailable}
       
-      currentMatch.optionsAvailable.forEach(element => {
+      currentMatch.value.optionsAvailable.forEach(element => {
         if (userPrediction.includes(element.wrestler))
         picked.value = element.wrestler
       })
@@ -83,13 +83,9 @@ export default {
     const goForward = () => {
       send("NEXT");
       userPrediction.push(
+        {[`${currentMatch.value.match}`] : `${picked.value}`}
         
-        picked.value
       )
-      console.log(userPrediction)
-      // console.log('PICKED' + picked.value)
-      // console.log('METAMATCH' + state.value.meta[`step.${state.value.value}`].match);
-      // console.log('AAMatch' + AAMatch)
     };
 
     
@@ -117,7 +113,8 @@ export default {
       picked,
       goBack,
       goForward,
-      userPrediction}
+      userPrediction,
+      currentMatch}
   }
 }
 </script>
