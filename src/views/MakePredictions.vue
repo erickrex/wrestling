@@ -8,11 +8,11 @@
           class="option"
           v-for="optionsAvailable in state.meta[`step.${state.value}`]
             .optionsAvailable"
-          :key="optionsAvailable"
+          :key="optionsAvailable.wrestler"
         >
           <input
             type="radio"
-            :value="optionsAvailable"
+            :value="optionsAvailable.wrestler"
             v-model="picked"
             :name="state.meta[`step.${state.value}`].match"
             validation="required"
@@ -58,26 +58,26 @@ export default {
     const picked = ref("");
     const { state, send } = useMachine(Card);
     const option = ref("");
+    console.log(Card.states['two'])
     //const answersFromUser = Card.context.results;
-    
     // {wwe:
     //       {winer: 'Roman', loser: 'Edge'}
     //     },
     //     {intercontinental: {winer: 'Big E', loser: 'Apollo'}
     //     }
-
-    const userPrediction = reactive([])
+    watchEffect(() => console.log(picked.value))
+    let userPrediction = []
+    console.log(userPrediction)
     let currentMatch;
     //const ref = ()
     watchEffect(() => {
       currentMatch = {match : state.value.meta[`step.${state.value.value}`].match, optionsAvailable: state.value.meta[`step.${state.value.value}`].optionsAvailable}
       
-      currentMatch.optionsAvailable.forEach (element => console.log('internal' + element.wrestler))
-          
-      
-      
+      currentMatch.optionsAvailable.forEach(element => {
+        if (userPrediction.includes(element.wrestler))
+        picked.value = element.wrestler
       })
-
+    })
    //console.log(contenders)
  
     const goForward = () => {
@@ -86,7 +86,7 @@ export default {
         
         picked.value
       )
-    
+      console.log(userPrediction)
       // console.log('PICKED' + picked.value)
       // console.log('METAMATCH' + state.value.meta[`step.${state.value.value}`].match);
       // console.log('AAMatch' + AAMatch)
@@ -106,7 +106,7 @@ export default {
     //     })
     const goBack = () => {
       //prev button not holding state
-      send("PREV");
+      send("PREVIOUS");
     };
 
     // allowed file types
