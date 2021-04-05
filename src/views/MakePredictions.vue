@@ -22,17 +22,25 @@
 
         <div class="submitQuestion">
           <input
+            v-if="state.value !== 'one'"
             class="submissionButton"
             type="button"
             value="Back"
             @click.prevent="goBack"
           />
           <input
-            v-if="!state.done"
+            v-if="state.value !== 'twelve'"
             class="submissionButton"
             type="button"
             value="Next"
             @click.prevent="goForward"
+          />
+          <input
+            v-if="state.value == 'twelve'"
+            class="submissionButton"
+            type="button"
+            value="Submit"
+            @click.prevent="persistFirebase"
           />
         </div>
       </form>
@@ -42,70 +50,76 @@
 
 <script>
 import { ref, watchEffect } from 'vue'
-import useStorage from '@/composables/useStorage'
-// import useCollection from '@/composables/useCollection'
-// import getUser from '@/composables/getUser'
+import useCollection from '@/composables/useCollection'
 import { timestamp } from '@/firebase/config'
 import { useRouter } from 'vue-router'
-
+import getUser from '@/composables/getUser'
 import Card from "@/composables/wrestlemaniaCard";
 import { useMachine } from "@xstate/vue";
 
 export default {
   name: 'MakePredictions',
   setup() {
+    const { user } = getUser()
+    const router = useRouter()
+    const isPending = ref(false)
 
+    const { error, addDoc } = useCollection('predictions')
     const picked = ref("");
     const { state, send } = useMachine(Card);
     const option = ref("");
     console.log(Card.states['two'])
-    //const answersFromUser = Card.context.results;
-    // {wwe:
-    //       {winer: 'Roman', loser: 'Edge'}
-    //     },
-    //     {intercontinental: {winer: 'Big E', loser: 'Apollo'}
-    //     }
     watchEffect(() => console.log(currentMatch))
-    let userPrediction = []
-    console.log(userPrediction)
+    let userPrediction = {}
     const currentMatch = ref({});
-    //const ref = ()
+
+
     watchEffect(() => {
-      currentMatch.value = {match : state.value.meta[`step.${state.value.value}`].match, optionsAvailable: state.value.meta[`step.${state.value.value}`].optionsAvailable}
-      
-      currentMatch.value.optionsAvailable.forEach(element => {
-        if (userPrediction.includes(element.wrestler))
-        picked.value = element.wrestler
-      })
+      currentMatch.value = {match : state.value.meta[`step.${state.value.value}`].match, optionsAvailable: state.value.meta[`step.${state.value.value}`].optionsAvailable}      
+      // currentMatch.value.optionsAvailable.forEach(element => {
+      //   if (userPrediction[currentMatch.value.match] == (element.wrestler))
+      //   picked.value = element.wrestler
+      // })
     })
-   //console.log(contenders)
+    watchEffect(() => {
+      if (userPrediction[`${currentMatch.value.match}`])
+      picked.value = userPrediction[`${currentMatch.value.match}`]
+      console.log(userPrediction)
+    })
  
     const goForward = () => {
       send("NEXT");
-      userPrediction.push(
-        {[`${currentMatch.value.match}`] : `${picked.value}`}
-        
-      )
+      if (picked.value !== '' && picked.value!== undefined){
+        userPrediction = {...userPrediction, [`${currentMatch.value.match}`] : `${picked.value}`}
+      }
+      picked.value=''
     };
 
-    
-    // const res = await addDoc({
-    //       match: match.value,
-    //       description: description.value,
-    //       userId: user.value.uid,
-    //       userName: user.value.displayName,
-    //       coverUrl: url.value,
-    //       filePath: filePath.value,
-    //       //all fire collections gotta have songs
-    //       extraComments: [],
-    //       createdAt: timestamp()
-    //     })
     const goBack = () => {
-      //prev button not holding state
       send("PREVIOUS");
+      if (picked.value !== '' && picked.value!== undefined){
+        userPrediction = {...userPrediction, [`${currentMatch.value.match}`] : `${picked.value}`}
+      }
+      picked.value=''
+
     };
 
-    // allowed file types
+    const persistFirebase = async () => {
+          isPending.value = true
+          const res = await addDoc({
+          ppv: 'Wrestlemania',
+          predictions: {...userPrediction},
+          userId: user.value.uid,
+          userName: user.value.displayName,
+          createdAt: timestamp()
+        })
+        isPending.value = false
+        if (!error.value) {
+          router.push({ name: 'Home', params: { id: res.id , toUrl: res.userName }})
+        }
+        console.log(res.id + res.userName)
+      
+    }
     
     return { state,
       send,
@@ -114,7 +128,7 @@ export default {
       goBack,
       goForward,
       userPrediction,
-      currentMatch}
+      currentMatch, persistFirebase, isPending}
   }
 }
 </script>

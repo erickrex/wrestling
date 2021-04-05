@@ -1,11 +1,7 @@
 import { assign, createMachine } from "xstate";
 
-const addPicked = assign({
-  results: (ctx, event) => ctx.results.add(event.winner)
-});
-
-const exemplary = () => {
-  console.log("ya pues compa");
+const test = () => {
+  console.log('persist to firebase')
 }
 
 const Card = createMachine(
@@ -13,9 +9,7 @@ const Card = createMachine(
     id: "step",
     initial: "one",
     context: {
-      results: new Set(),
-      productRoute: "",
-      message: "",
+      
     },
     states: {
       one: {
@@ -27,8 +21,8 @@ const Card = createMachine(
           ],
         },
         on: {
-          NEXT: { target: "two", actions: [addPicked] },
-          PREVIOUS: { target: "one", actions: [addPicked] }
+          NEXT: { target: "two"},
+          PREVIOUS: { target: "one"}
         },
       },
       two: {
@@ -40,8 +34,8 @@ const Card = createMachine(
           ],
         },
         on: {
-            NEXT: { target: "three", actions: [addPicked] },
-            PREVIOUS: { target: "one", actions: [addPicked] },
+            NEXT: { target: "three"},
+            PREVIOUS: { target: "one"},
           },
       },
       three: {
@@ -53,8 +47,8 @@ const Card = createMachine(
           ],
         },
         on: {
-            NEXT: { target: "four", actions: [addPicked] },
-            PREVIOUS: { target: "two", actions: [addPicked] },
+            NEXT: { target: "four"},
+            PREVIOUS: { target: "two"},
           },
       },
       four: {
@@ -66,8 +60,8 @@ const Card = createMachine(
           ],
         },
         on: {
-            NEXT: { target: "five", actions: [addPicked] },
-            PREVIOUS: { target: "three", actions: [addPicked] },
+            NEXT: { target: "five"},
+            PREVIOUS: { target: "three"},
           },
       },
       five: {
@@ -79,8 +73,8 @@ const Card = createMachine(
           ],
         },
         on: {
-            NEXT: { target: "six", actions: [addPicked] },
-            PREVIOUS: { target: "four", actions: [addPicked] },
+            NEXT: { target: "six"},
+            PREVIOUS: { target: "four"},
           },
       },
       six: {
@@ -92,8 +86,8 @@ const Card = createMachine(
           ],
         },
         on: {
-            NEXT: { target: "seven", actions: [addPicked] },
-            PREVIOUS: { target: "five", actions: [addPicked] },
+            NEXT: { target: "seven"},
+            PREVIOUS: { target: "five"},
           },
       },
       seven: {
@@ -106,8 +100,8 @@ const Card = createMachine(
           ],
         },
         on: {
-            NEXT: { target: "eight", actions: [addPicked] },
-            PREVIOUS: { target: "six", actions: [addPicked] }
+            NEXT: { target: "eight"},
+            PREVIOUS: { target: "six"}
         },
       },
       eight: {
@@ -119,8 +113,8 @@ const Card = createMachine(
             ],
         },
         on: {
-            NEXT: { target: "nine", actions: [addPicked] },
-            PREVIOUS: { target: "seven", actions: [addPicked] }
+            NEXT: { target: "nine"},
+            PREVIOUS: { target: "seven"}
         },
       },
       nine: {
@@ -132,8 +126,8 @@ const Card = createMachine(
           ],
         },
         on: {
-            NEXT: { target: "ten", actions: [addPicked] },
-            PREVIOUS: { target: "eight", actions: [addPicked] }
+            NEXT: { target: "ten"},
+            PREVIOUS: { target: "eight"}
         },
       },
       ten: {
@@ -145,8 +139,8 @@ const Card = createMachine(
           ],
         },
         on: {
-            NEXT: { target: "eleven", actions: [addPicked] },
-            PREVIOUS: { target: "nine", actions: [addPicked] }
+            NEXT: { target: "eleven"},
+            PREVIOUS: { target: "nine"}
         },
       },
       eleven: {
@@ -158,8 +152,8 @@ const Card = createMachine(
           ],
         },
         on: {
-            NEXT: { target: "twelve", actions: [addPicked] },
-            PREVIOUS: { target: "ten", actions: [addPicked] }
+            NEXT: { target: "twelve"},
+            PREVIOUS: { target: "ten"}
         },
       },
       twelve: {
@@ -167,16 +161,14 @@ const Card = createMachine(
           match: "Great, see you at Wrestlemania"
         },
         on: {
-          entry: { actions: [addPicked] },
+          PREVIOUS: { target: "eleven"},
         },
-        type: "final",
       },
     },
   },
   {
     actions: {
-      addPicked,
-      exemplary
+      test
     },
   }
 );

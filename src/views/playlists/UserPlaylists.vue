@@ -19,7 +19,7 @@ export default {
     const { user } = getUser()
     const { documents: predictions } = getCollection(
       'predictions', ['userId', '==', user.value.uid])
-    console.log(user.value.uuid)
+    console.log(user.value.uid)
   // const { error, documents : predictions } = getCollection('predictions')
     
     return { predictions, user }
