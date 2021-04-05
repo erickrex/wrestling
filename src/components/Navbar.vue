@@ -2,7 +2,7 @@
   <div class="navbar">
     <nav>
       <img src="@/assets/logo.png"/>
-      <h1><router-link :to="{ name: 'Home' }">Wrestling Predictions</router-link></h1>
+      <h1><router-link :to="{name: 'Home' }">Wrestling Predictions</router-link></h1>
       <div class="links">
         <div v-if="user">
           <router-link :to="{ name: 'MakePredictions' }">Predictions</router-link>

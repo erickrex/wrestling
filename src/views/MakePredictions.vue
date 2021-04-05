@@ -115,7 +115,7 @@ export default {
         })
         isPending.value = false
         if (!error.value) {
-          router.push({ name: 'Home', params: { id: res.id , toUrl: res.userName }})
+          router.push({ name: 'Home'})
         }
         console.log(res.id + res.userName)
       

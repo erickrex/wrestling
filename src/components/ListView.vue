@@ -7,7 +7,7 @@
         </div>
         <div class="info">
           <h3>{{ singleprediction.match }}</h3>
-          <p>created by {{ singleprediction.userName }}</p>
+          <!-- <p>created by {{ singleprediction.userName }}</p> -->
         </div>
         <div class="song-number">
           <p>{{ singleprediction.extraComments.length }} songs</p>
