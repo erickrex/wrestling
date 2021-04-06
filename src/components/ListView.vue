@@ -12,26 +12,26 @@
           <span>{{ singleprediction.userName }}</span>
         </p>
         <h2>{{ singleprediction.userName }}</h2>
-        <h2>{{ singleprediction.predictions["WWE Championship Match"] }}</h2>
-        <!-- <p>created by {{ singleprediction.userName }}</p> -->
-        <div
-          v-for="(matchWinner, matchName) in singleprediction.predictions[
-            'WWE Championship Match'
-          ]"
-          :key="matchName"
-        >
-          <p>{{ matchWinner }} will win the {{ matchName }}</p>
-        </div>
-        <div
-          v-for="(matchWinner, matchName) in singleprediction.predictions[
-            'Universal Championship Triple Threat Match'
-          ]"
-          :key="matchName"
-        >
-          <p>{{ matchWinner }} will win the {{ matchName }}</p>
-        </div>
-
-        <div class="song-number"></div>
+        <p>
+          <span>{{
+            singleprediction.predictions["WWE Championship Match"]
+          }}</span>
+          will win the WWE Championship Match
+        </p>
+        <p>
+          <span>{{
+            singleprediction.predictions[
+              "Universal Championship Triple Threat Match"
+            ]
+          }}</span>
+          will win the Universal Championship Match
+        </p>
+        <p>
+          <span>{{
+            singleprediction.predictions["Smackdown Women's Championship Match"]
+          }}</span>
+          will win the "Smackdown Women's Championship Match"
+        </p>
       </div>
     </router-link>
   </div>
@@ -41,27 +41,7 @@
 import { computed } from "vue";
 export default {
   props: ["predictions"],
-  setup(props) {
-    const displayOrder = [
-      "WWE Championship match",
-      "Universal Championship Triple Threat Match",
-      "Celebrity Match",
-    ];
-    const partialPredictions = computed(() => {
-      props.predictions.map((element) => {
-        let partial = [
-          element.predictions["WWE Championship Match"],
-          element.predictions["Universal Championship Triple Threat Match"],
-          element.predictions["Smackdown Women's Championship Match"],
-          element.predictions["Smackdown Women's Championship Match"],
-        ];
-        return partial;
-      });
-    });
-
-    console.log(partialPredictions);
-    return { partialPredictions, displayOrder };
-  },
+  setup(props) {},
 };
 </script>
 
@@ -72,7 +52,7 @@ export default {
   align-items: center;
   padding: 20px;
   border-radius: 10px;
-  background: white;
+  background: black;
   margin: 16px 0;
   transition: all ease 0.2s;
 }

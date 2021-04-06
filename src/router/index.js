@@ -4,7 +4,7 @@ import Login from "../views/auth/Login.vue";
 import Signup from "../views/auth/Signup.vue";
 import CreatePlaylist from "../views/playlists/CreatePlaylist.vue";
 import PlaylistDetails from "../views/playlists/PlaylistDetails.vue";
-import UserPlaylists from "../views/playlists/UserPlaylists.vue";
+import UserPredictions from "../views/playlists/UserPredictions.vue";
 import MakePredictions from "../views/MakePredictions.vue";
 
 // route guard
@@ -50,9 +50,9 @@ const routes = [
     beforeEnter: requireAuth,
   },
   {
-    path: "/playlists/user",
-    name: "UserPlaylists",
-    component: UserPlaylists,
+    path: "/predictions/user",
+    name: "UserPredictions",
+    component: UserPredictions,
     beforeEnter: requireAuth,
   },
   {

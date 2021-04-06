@@ -8,12 +8,12 @@
       <div class="links">
         <div v-if="user">
           <router-link :to="{ name: 'MakePredictions' }"
-            >Predictions</router-link
+            >Pick Winners!</router-link
           >
-          <router-link :to="{ name: 'UserPlaylists' }"
+          <router-link :to="{ name: 'UserPredictions' }"
             >My Predictions</router-link
           >
-          <span v-if="user" class="hello">Welcome {{ user.displayName }}!</span>
+
           <button @click="handleClick">Logout</button>
         </div>
         <div v-else>
@@ -22,6 +22,9 @@
         </div>
       </div>
     </nav>
+    <div class="hello">
+      <span v-if="user" class="btn">Welcome {{ user.displayName }}!</span>
+    </div>
   </div>
 </template>
 
@@ -49,29 +52,30 @@ export default {
 .navbar {
   padding: 16px 10px;
   margin-bottom: 60px;
-  background: white;
+  background: black;
 }
 nav {
   display: flex;
-
   align-items: center;
   max-width: 1200px;
   margin: 0 auto;
 }
 nav img {
-  max-height: 60px;
+  max-height: 10vw;
 }
 nav h1 {
   margin-left: 20px;
 }
 nav .links {
+  width: 100%;
   margin-left: auto;
 }
 
 nav .links a,
 button {
-  margin: 1rem;
+  margin: 0.5rem;
   font-size: 1.2rem;
+  font-weight: bold;
 }
 
 nav .links a:hover,
@@ -81,6 +85,7 @@ button:hover {
 }
 
 .hello {
-  font-size: 1.3rem;
+  margin: 0 30vw;
+  font-size: 1.8rem;
 }
 </style>

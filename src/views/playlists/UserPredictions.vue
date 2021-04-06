@@ -1,5 +1,5 @@
 <template>
-  <div class="user-playlists">
+  <div class="user-predictions">
     <h2>My predictions</h2>
     <div v-if="predictions">
       <ListView :predictions="predictions" />

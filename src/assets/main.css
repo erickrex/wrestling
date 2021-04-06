@@ -1,14 +1,14 @@
 /* custom font */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap");
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Ubuntu:ital,wght@0,400;0,500;0,700;1,400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Ubuntu:ital,wght@0,400;0,500;0,700;1,400&display=swap");
 
 /* variables */
 :root {
   --primary: #1d1d1d;
   --secondary: #04334f;
   --warning: #da0f41;
-  --pornblack: #000;
+  --pornblack: rgb(223, 148, 9);
   --pornyellow: #f90;
 }
 
@@ -16,30 +16,32 @@
 * {
   margin: 0;
   padding: 0;
-  font-family: 'Ubuntu', Roboto;
-  color: var(--primary);
+  font-family: "Ubuntu", Roboto;
+  color: white;
 }
 body {
-  background: #fafafa;
+  background: var(--primary);
 }
 a {
   text-decoration: none;
 }
 
 /* buttons */
-button, .btn { 
-  background: var(--secondary);
+button,
+.btn {
+  background: var(--pornyellow);
   border-radius: 8px;
   border: 0;
   padding: 8px 12px;
   font-weight: 600;
   cursor: pointer;
   display: inline-block;
-  color: #f0eeaf;
+  color: black;
 }
-button:hover, .btn:hover {
-  background: var(--primary);
-  color: white;
+button:hover,
+.btn:hover {
+  background: var(--pornblack);
+  color: black;
 }
 button:disabled {
   opacity: 0.5;
@@ -54,11 +56,12 @@ form {
   margin: 0 auto;
   padding: 30px;
   border-radius: 8px;
-  box-shadow: 1px 2px 3px rgba(50,50,50,0.05);
-  border: 1px solid  var(--secondary);
+  box-shadow: 1px 2px 3px rgba(50, 50, 50, 0.05);
+  border: 1px solid var(--secondary);
   background: white;
 }
-input, textarea {
+input,
+textarea {
   border: 0;
   border-bottom: 1px solid var(--secondary);
   padding: 10px;

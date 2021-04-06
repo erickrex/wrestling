@@ -149,9 +149,9 @@ export default {
 };
 </script>
 
-<style>
-form {
-  background: black;
+<style scoped>
+.contender {
+  background-color: #151515;
 }
 .contenderPic {
   height: 10rem;
