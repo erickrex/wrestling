@@ -1,123 +1,124 @@
 import { assign, createMachine } from "xstate";
 
 const test = () => {
-  console.log('persist to firebase')
-}
+  console.log("persist to firebase");
+};
 
 const Card = createMachine(
   {
     id: "step",
     initial: "one",
-    context: {
-      
-    },
+    context: {},
     states: {
       one: {
         meta: {
-          match: "WWE Championship match",
+          match: "WWE Championship Match",
           optionsAvailable: [
             { wrestler: "Bobby Lashley", status: "champion" },
-            { wrestler: "Drew McIntyre", status: "challenger" }
+            { wrestler: "Drew McIntyre", status: "challenger" },
           ],
         },
         on: {
-          NEXT: { target: "two"},
-          PREVIOUS: { target: "one"}
+          NEXT: { target: "two" },
+          PREVIOUS: { target: "one" },
         },
       },
       two: {
         meta: {
-          match: "Smackdown Womens Championship?",
+          match: "Smackdown Women's Championship Match",
           optionsAvailable: [
             { wrestler: "Sasha Banks", status: "champion" },
             { wrestler: "Bianca Belair", status: "challenger" },
           ],
         },
         on: {
-            NEXT: { target: "three"},
-            PREVIOUS: { target: "one"},
-          },
+          NEXT: { target: "three" },
+          PREVIOUS: { target: "one" },
+        },
       },
       three: {
         meta: {
           match: "Celebrity Match featuring Bad Bunny",
           optionsAvailable: [
-            { wrestler: "The Miz", status: "challenger" },
             { wrestler: "Bad Bunny", status: "challenger" },
+            { wrestler: "The Miz", status: "challenger" },
           ],
         },
         on: {
-            NEXT: { target: "four"},
-            PREVIOUS: { target: "two"},
-          },
+          NEXT: { target: "four" },
+          PREVIOUS: { target: "two" },
+        },
       },
       four: {
         meta: {
-          match: "Raw Tag Team Championships",
+          match: "Cesaro vs ",
           optionsAvailable: [
-            { wrestler: "AJ Styles and OMAS", status: "challenger" },
+            { wrestler: "Cesaro", status: "challenger" },
+            { wrestler: "Seth Rollins", status: "challenger" },
+          ],
+        },
+        on: {
+          NEXT: { target: "five" },
+          PREVIOUS: { target: "three" },
+        },
+      },
+      five: {
+        meta: {
+          match: "Raw Tag Team Championship Match",
+          optionsAvailable: [
+            { wrestler: "AJ Styles and Omos", status: "challenger" },
             { wrestler: "The New Day", status: "champion" },
           ],
         },
         on: {
-            NEXT: { target: "five"},
-            PREVIOUS: { target: "three"},
-          },
-      },
-      five: {
-        meta: {
-          match: "Seth Rollins vs Cesaro",
-          optionsAvailable: [
-            { wrestler: "Seth Rollins", status: "challenger" },
-            { wrestler: "Cesaro", status: "challenger" },
-          ],
+          NEXT: { target: "six" },
+          PREVIOUS: { target: "four" },
         },
-        on: {
-            NEXT: { target: "six"},
-            PREVIOUS: { target: "four"},
-          },
       },
       six: {
         meta: {
-          match: "Shane McMahon vs Braun Strowman",
+          match: "Steel Cage Match",
           optionsAvailable: [
             { wrestler: "Shane McMahon", status: "challenger" },
             { wrestler: "Braun Strowman", status: "challenger" },
           ],
         },
         on: {
-            NEXT: { target: "seven"},
-            PREVIOUS: { target: "five"},
-          },
+          NEXT: { target: "sixB" },
+          PREVIOUS: { target: "five" },
+        },
       },
-      seven: {
+      sixB: {
         meta: {
-          match: "Universal Championship thriple threat match",
+          match:
+            "Tag Team Turmoil to earn a WWE Women's Tag Team Title Match on Night 2",
           optionsAvailable: [
-            { wrestler: "Roman Reigns", status: "champion" },
-            { wrestler: "Edge", status: "challenger" },
-            { wrestler: "Daniel Bryan", status: "challenger" }
+            { wrestler: "Naomi & Lana", status: "challenger" },
+            { wrestler: "Mandy Rose & Dana Brooke", status: "challenger" },
+            { wrestler: "The Riott Squad", status: "challenger" },
+            { wrestler: "Natalya & Tamina", status: "challenger" },
           ],
         },
         on: {
-            NEXT: { target: "eight"},
-            PREVIOUS: { target: "six"}
+          NEXT: { target: "seven" },
+          PREVIOUS: { target: "six" },
+        },
+      },
+      seven: {
+        meta: {
+          match: "Universal Championship Triple Threat Match",
+          optionsAvailable: [
+            { wrestler: "Roman Reigns", status: "champion" },
+            { wrestler: "Edge", status: "challenger" },
+            { wrestler: "Daniel Bryan", status: "challenger" },
+          ],
+        },
+        on: {
+          NEXT: { target: "eight" },
+          PREVIOUS: { target: "six" },
         },
       },
       eight: {
-        meta: {
-            match: "Raw Womens Championship",
-            optionsAvailable: [
-              { wrestler: "Asuka", status: "champion" },
-              { wrestler: "Rhea Ripley", status: "challenger" },
-            ],
-        },
-        on: {
-            NEXT: { target: "nine"},
-            PREVIOUS: { target: "seven"}
-        },
-      },
-      nine: {
         meta: {
           match: "The Fiend with Alexa Bliss vs Randy Orton",
           optionsAvailable: [
@@ -126,8 +127,21 @@ const Card = createMachine(
           ],
         },
         on: {
-            NEXT: { target: "ten"},
-            PREVIOUS: { target: "eight"}
+          NEXT: { target: "nine" },
+          PREVIOUS: { target: "seven" },
+        },
+      },
+      nine: {
+        meta: {
+          match: "Raw Women's Championship",
+          optionsAvailable: [
+            { wrestler: "Asuka", status: "champion" },
+            { wrestler: "Rhea Ripley", status: "challenger" },
+          ],
+        },
+        on: {
+          NEXT: { target: "ten" },
+          PREVIOUS: { target: "eight" },
         },
       },
       ten: {
@@ -139,8 +153,21 @@ const Card = createMachine(
           ],
         },
         on: {
-            NEXT: { target: "eleven"},
-            PREVIOUS: { target: "nine"}
+          NEXT: { target: "tenB" },
+          PREVIOUS: { target: "nine" },
+        },
+      },
+      tenB: {
+        meta: {
+          match: "Riddle vs Sheamus",
+          optionsAvailable: [
+            { wrestler: "Riddle", status: "champion" },
+            { wrestler: "Sheamus", status: "challenger" },
+          ],
+        },
+        on: {
+          NEXT: { target: "eleven" },
+          PREVIOUS: { target: "ten" },
         },
       },
       eleven: {
@@ -152,23 +179,37 @@ const Card = createMachine(
           ],
         },
         on: {
-            NEXT: { target: "twelve"},
-            PREVIOUS: { target: "ten"}
+          NEXT: { target: "elevenB" },
+          PREVIOUS: { target: "ten" },
+        },
+      },
+      elevenB: {
+        meta: {
+          match: "WWE Women's Tag Team Title Match",
+          optionsAvailable: [
+            { wrestler: "Shayna Baszler & Nia Jax", status: "champion" },
+            { wrestler: "Winner from night one", status: "challenger" },
+          ],
+        },
+        on: {
+          NEXT: { target: "twelve" },
+          PREVIOUS: { target: "eleven" },
         },
       },
       twelve: {
         meta: {
-          match: "Great, see you at Wrestlemania"
+          match: "Great, see you at Wrestlemania",
+          optionsAvailable: [{ wrestler: "Alexa Bliss", status: "" }],
         },
         on: {
-          PREVIOUS: { target: "eleven"},
+          PREVIOUS: { target: "elevenB" },
         },
       },
     },
   },
   {
     actions: {
-      test
+      test,
     },
   }
 );

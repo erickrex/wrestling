@@ -3,10 +3,10 @@
     <h1>Pick your winners</h1>
     <div class="selector-container">
       <h2>{{ currentMatch.match }}</h2>
-      <form className="selector">
+      <form class="contender">
         <div
           class="option"
-          v-for="optionsAvailable in state.meta[`step.${state.value}`]
+          v-for="(optionsAvailable, index) in state.meta[`step.${state.value}`]
             .optionsAvailable"
           :key="optionsAvailable.wrestler"
         >
@@ -16,8 +16,15 @@
             v-model="picked"
             :name="state.meta[`step.${state.value}`].match"
             validation="required"
+            class="contenderSelect"
           />
           {{ optionsAvailable.wrestler }}
+          <img
+            :src="
+              require(`@/assets/${currentMatch.optionsAvailable[index].wrestler}.png`)
+            "
+            class="contenderPic"
+          />
         </div>
 
         <div class="submitQuestion">
@@ -49,93 +56,103 @@
 </template>
 
 <script>
-import { ref, watchEffect } from 'vue'
-import useCollection from '@/composables/useCollection'
-import { timestamp } from '@/firebase/config'
-import { useRouter } from 'vue-router'
-import getUser from '@/composables/getUser'
+import { ref, watchEffect } from "vue";
+import useCollection from "@/composables/useCollection";
+import { timestamp } from "@/firebase/config";
+import { useRouter } from "vue-router";
+import getUser from "@/composables/getUser";
 import Card from "@/composables/wrestlemaniaCard";
 import { useMachine } from "@xstate/vue";
 
 export default {
-  name: 'MakePredictions',
+  name: "MakePredictions",
   setup() {
-    const { user } = getUser()
-    const router = useRouter()
-    const isPending = ref(false)
-
-    const { error, addDoc } = useCollection('predictions')
+    const { user } = getUser();
+    const router = useRouter();
+    const isPending = ref(false);
+    const { error, addDoc } = useCollection("predictions");
     const picked = ref("");
     const { state, send } = useMachine(Card);
     const option = ref("");
-    console.log(Card.states['two'])
-    watchEffect(() => console.log(currentMatch))
-    let userPrediction = {}
+    let userPrediction = {};
     const currentMatch = ref({});
-
-
+    const picture = ref("");
     watchEffect(() => {
-      currentMatch.value = {match : state.value.meta[`step.${state.value.value}`].match, optionsAvailable: state.value.meta[`step.${state.value.value}`].optionsAvailable}      
-      // currentMatch.value.optionsAvailable.forEach(element => {
-      //   if (userPrediction[currentMatch.value.match] == (element.wrestler))
-      //   picked.value = element.wrestler
-      // })
-    })
+      currentMatch.value = {
+        match: state.value.meta[`step.${state.value.value}`].match,
+        optionsAvailable:
+          state.value.meta[`step.${state.value.value}`].optionsAvailable,
+      };
+      console.log(currentMatch.value.optionsAvailable[0].wrestler);
+    });
+
     watchEffect(() => {
       if (userPrediction[`${currentMatch.value.match}`])
-      picked.value = userPrediction[`${currentMatch.value.match}`]
-      console.log(userPrediction)
-    })
- 
+        picked.value = userPrediction[`${currentMatch.value.match}`];
+      console.log(userPrediction);
+    });
+
     const goForward = () => {
       send("NEXT");
-      if (picked.value !== '' && picked.value!== undefined){
-        userPrediction = {...userPrediction, [`${currentMatch.value.match}`] : `${picked.value}`}
+      if (picked.value !== "" && picked.value !== undefined) {
+        userPrediction = {
+          ...userPrediction,
+          [`${currentMatch.value.match}`]: `${picked.value}`,
+        };
       }
-      picked.value=''
+      picked.value = "";
     };
 
     const goBack = () => {
       send("PREVIOUS");
-      if (picked.value !== '' && picked.value!== undefined){
-        userPrediction = {...userPrediction, [`${currentMatch.value.match}`] : `${picked.value}`}
+      if (picked.value !== "" && picked.value !== undefined) {
+        userPrediction = {
+          ...userPrediction,
+          [`${currentMatch.value.match}`]: `${picked.value}`,
+        };
       }
-      picked.value=''
-
+      picked.value = "";
     };
 
     const persistFirebase = async () => {
-          isPending.value = true
-          const res = await addDoc({
-          ppv: 'Wrestlemania',
-          predictions: {...userPrediction},
-          userId: user.value.uid,
-          userName: user.value.displayName,
-          createdAt: timestamp()
-        })
-        isPending.value = false
-        if (!error.value) {
-          router.push({ name: 'Home'})
-        }
-        console.log(res.id + res.userName)
-      
-    }
-    
-    return { state,
+      isPending.value = true;
+      const res = await addDoc({
+        ppv: "Wrestlemania",
+        predictions: { ...userPrediction },
+        userId: user.value.uid,
+        userName: user.value.displayName,
+        createdAt: timestamp(),
+      });
+      isPending.value = false;
+      if (!error.value) {
+        router.push({ name: "Home" });
+      }
+
+      console.log(res.id + res.userName);
+    };
+
+    return {
+      state,
       send,
       option,
       picked,
       goBack,
       goForward,
       userPrediction,
-      currentMatch, persistFirebase, isPending}
-  }
-}
+      currentMatch,
+      persistFirebase,
+      isPending,
+    };
+  },
+};
 </script>
 
 <style>
 form {
   background: black;
+}
+.contenderPic {
+  height: 10rem;
 }
 input[type="file"] {
   border: 0;

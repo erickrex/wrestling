@@ -1,72 +1,71 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../views/Home.vue'
-import Login from '../views/auth/Login.vue'
-import Signup from '../views/auth/Signup.vue'
-import CreatePlaylist from '../views/playlists/CreatePlaylist.vue'
-import PlaylistDetails from '../views/playlists/PlaylistDetails.vue'
-import UserPlaylists from '../views/playlists/UserPlaylists.vue'
-import MakePredictions from '../views/MakePredictions.vue'
+import { createRouter, createWebHistory } from "vue-router";
+import Home from "../views/Home.vue";
+import Login from "../views/auth/Login.vue";
+import Signup from "../views/auth/Signup.vue";
+import CreatePlaylist from "../views/playlists/CreatePlaylist.vue";
+import PlaylistDetails from "../views/playlists/PlaylistDetails.vue";
+import UserPlaylists from "../views/playlists/UserPlaylists.vue";
+import MakePredictions from "../views/MakePredictions.vue";
 
 // route guard
-import { projectAuth } from '../firebase/config';
+import { projectAuth } from "../firebase/config";
 
 const requireAuth = (to, from, next) => {
-  let user = projectAuth.currentUser
+  let user = projectAuth.currentUser;
   if (!user) {
-    next({ name: 'Login' })
+    next({ name: "Login" });
   } else {
-    next()
+    next();
   }
-}
+};
 
 const routes = [
   {
-    path: '/',
-    name: 'Home',
+    path: "/",
+    name: "Home",
     component: Home,
-    beforeEnter: requireAuth
   },
   {
-    path: '/login',
-    name: 'Login',
-    component: Login
+    path: "/login",
+    name: "Login",
+    component: Login,
   },
   {
-    path: '/signup',
-    name: 'Signup',
-    component: Signup
+    path: "/signup",
+    name: "Signup",
+    component: Signup,
   },
   {
-    path: '/playlists/create',
-    name: 'CreatePlaylist',
+    path: "/playlists/create",
+    name: "CreatePlaylist",
     component: CreatePlaylist,
-    beforeEnter: requireAuth
+    beforeEnter: requireAuth,
   },
   //path: '/wwe/:toUrl/wrestlemania',
   {
-    path: '/wwe/:toUrl/wrestlemania',
-    name: 'PlaylistDetails',
+    path: "/wwe/:toUrl/wrestlemania",
+    name: "PlaylistDetails",
     component: PlaylistDetails,
     props: true,
     beforeEnter: requireAuth,
   },
   {
-    path: '/playlists/user',
-    name: 'UserPlaylists',
+    path: "/playlists/user",
+    name: "UserPlaylists",
     component: UserPlaylists,
-    beforeEnter: requireAuth
+    beforeEnter: requireAuth,
   },
   {
-    path: '/predictions',
-    name: 'MakePredictions',
+    path: "/predictions",
+    name: "MakePredictions",
     component: MakePredictions,
-    beforeEnter: requireAuth
-  }
-]
+    beforeEnter: requireAuth,
+  },
+];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;

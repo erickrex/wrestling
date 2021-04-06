@@ -54,6 +54,7 @@ export default {
           createdAt: timestamp(),
         });
         isPending.value = false;
+        //Redirect to see the Playlist
         if (!error.value) {
           router.push({
             name: "PlaylistDetails",
