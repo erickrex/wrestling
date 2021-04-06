@@ -7,11 +7,30 @@
       }"
     >
       <div class="single">
-        <div class="thumbnail"></div>
-        <div class="info">
-          <h3>{{ singleprediction.match }}</h3>
-          <!-- <p>created by {{ singleprediction.userName }}</p> -->
+        <p>
+          {{ singleprediction.ppv }} picks by
+          <span>{{ singleprediction.userName }}</span>
+        </p>
+        <h2>{{ singleprediction.userName }}</h2>
+        <h2>{{ singleprediction.predictions["WWE Championship Match"] }}</h2>
+        <!-- <p>created by {{ singleprediction.userName }}</p> -->
+        <div
+          v-for="(matchWinner, matchName) in singleprediction.predictions[
+            'WWE Championship Match'
+          ]"
+          :key="matchName"
+        >
+          <p>{{ matchWinner }} will win the {{ matchName }}</p>
         </div>
+        <div
+          v-for="(matchWinner, matchName) in singleprediction.predictions[
+            'Universal Championship Triple Threat Match'
+          ]"
+          :key="matchName"
+        >
+          <p>{{ matchWinner }} will win the {{ matchName }}</p>
+        </div>
+
         <div class="song-number"></div>
       </div>
     </router-link>
@@ -19,14 +38,37 @@
 </template>
 
 <script>
+import { computed } from "vue";
 export default {
   props: ["predictions"],
+  setup(props) {
+    const displayOrder = [
+      "WWE Championship match",
+      "Universal Championship Triple Threat Match",
+      "Celebrity Match",
+    ];
+    const partialPredictions = computed(() => {
+      props.predictions.map((element) => {
+        let partial = [
+          element.predictions["WWE Championship Match"],
+          element.predictions["Universal Championship Triple Threat Match"],
+          element.predictions["Smackdown Women's Championship Match"],
+          element.predictions["Smackdown Women's Championship Match"],
+        ];
+        return partial;
+      });
+    });
+
+    console.log(partialPredictions);
+    return { partialPredictions, displayOrder };
+  },
 };
 </script>
 
 <style scoped>
 .single {
   display: flex;
+  flex-direction: column;
   align-items: center;
   padding: 20px;
   border-radius: 10px;
@@ -50,8 +92,8 @@ img {
   max-height: 150%;
   display: block;
 }
-.info {
-  margin: 0 30px;
+span {
+  font-weight: bold;
 }
 .song-number {
   margin-left: auto;

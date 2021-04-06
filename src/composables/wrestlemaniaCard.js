@@ -38,7 +38,7 @@ const Card = createMachine(
       },
       three: {
         meta: {
-          match: "Celebrity Match featuring Bad Bunny",
+          match: "Celebrity Match",
           optionsAvailable: [
             { wrestler: "Bad Bunny", status: "challenger" },
             { wrestler: "The Miz", status: "challenger" },
@@ -51,7 +51,7 @@ const Card = createMachine(
       },
       four: {
         meta: {
-          match: "Cesaro vs ",
+          match: "Cesaro vs Seth Rollins",
           optionsAvailable: [
             { wrestler: "Cesaro", status: "challenger" },
             { wrestler: "Seth Rollins", status: "challenger" },

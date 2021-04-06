@@ -77,6 +77,8 @@ export default {
     let userPrediction = {};
     const currentMatch = ref({});
     const picture = ref("");
+
+    //extracting each single match for better manipulation
     watchEffect(() => {
       currentMatch.value = {
         match: state.value.meta[`step.${state.value.value}`].match,
@@ -85,7 +87,7 @@ export default {
       };
       console.log(currentMatch.value.optionsAvailable[0].wrestler);
     });
-
+    //hold state of picked winner when going back and forth
     watchEffect(() => {
       if (userPrediction[`${currentMatch.value.match}`])
         picked.value = userPrediction[`${currentMatch.value.match}`];
