@@ -74,9 +74,7 @@ img {
 span {
   font-weight: bold;
 }
-.song-number {
-  margin-left: auto;
-}
+
 .prediction-title {
   margin-bottom: 0.7rem;
 }

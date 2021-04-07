@@ -7,7 +7,7 @@
       <h1 class="username">Picks by {{ prediction.userName }}</h1>
       <p class="description"></p>
     </div>
-    <div class="song-list">
+    <div class="list">
       <!-- <div v-if="!prediction.length">You have not picked your winners yet.</div> -->
       <div
         v-for="(match, matchName) in prediction.predictions"
@@ -92,13 +92,5 @@ export default {
 }
 .description {
   text-align: left;
-}
-.single-song {
-  padding: 10px 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px dashed var(--secondary);
-  margin-bottom: 20px;
 }
 </style>

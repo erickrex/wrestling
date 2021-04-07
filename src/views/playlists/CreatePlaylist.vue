@@ -48,7 +48,6 @@ export default {
           userName: user.value.displayName,
           coverUrl: url.value,
           filePath: filePath.value,
-          songs: [],
           //all fire collections gotta have songs
           extraComments: [],
           createdAt: timestamp(),
