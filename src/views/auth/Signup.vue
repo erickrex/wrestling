@@ -1,9 +1,19 @@
 <template>
-  <form @submit.prevent="handleSubmit">
+  <form @submit.prevent="handleSubmit" class="signup">
     <h3>Sign up</h3>
-    <input type="text" placeholder="Display name" v-model="displayName" />
-    <input type="email" placeholder="Email" v-model="email" />
-    <input type="password" placeholder="Password" v-model="password" />
+    <input
+      type="text"
+      placeholder="Display name"
+      v-model="displayName"
+      class="textbox"
+    />
+    <input type="email" placeholder="Email" v-model="email" class="textbox" />
+    <input
+      type="password"
+      placeholder="Password"
+      v-model="password"
+      class="textbox"
+    />
     <div v-if="error" class="error">{{ error }}</div>
     <button v-if="!isPending">Sign up</button>
     <button v-if="isPending" disabled>Loading</button>
@@ -32,3 +42,13 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.signup {
+  background-color: black;
+  color: black;
+}
+.textbox {
+  color: black;
+}
+</style>

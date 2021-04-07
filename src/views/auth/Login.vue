@@ -1,8 +1,13 @@
 <template>
-  <form @submit.prevent="handleSubmit">
+  <form @submit.prevent="handleSubmit" class="login">
     <h3>Login</h3>
-    <input type="email" placeholder="Email" v-model="email" />
-    <input type="password" placeholder="Password" v-model="password" />
+    <input type="email" placeholder="Email" v-model="email" class="textbox" />
+    <input
+      type="password"
+      placeholder="Password"
+      v-model="password"
+      class="textbox"
+    />
     <div v-if="error" class="error">{{ error }}</div>
     <button v-if="!isPending" class="button">Log in</button>
     <button v-if="isPending" disabled>Loading</button>
@@ -33,4 +38,11 @@ export default {
 </script>
 
 <style scoped>
+.login {
+  background-color: black;
+  color: black;
+}
+.textbox {
+  color: black;
+}
 </style>

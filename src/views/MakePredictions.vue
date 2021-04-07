@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h1>Pick your winners</h1>
     <div class="selector-container">
+      <h1>Pick your winners</h1>
       <h2>{{ currentMatch.match }}</h2>
       <form class="contender">
         <div
@@ -10,6 +10,7 @@
             .optionsAvailable"
           :key="optionsAvailable.wrestler"
         >
+          <h2>{{ optionsAvailable.wrestler }}</h2>
           <input
             type="radio"
             :value="optionsAvailable.wrestler"
@@ -18,7 +19,7 @@
             validation="required"
             class="contenderSelect"
           />
-          {{ optionsAvailable.wrestler }}
+
           <img
             :src="
               require(`@/assets/${currentMatch.optionsAvailable[index].wrestler}.png`)
@@ -30,21 +31,21 @@
         <div class="submitQuestion">
           <input
             v-if="state.value !== 'one'"
-            class="submissionButton"
+            class="btn"
             type="button"
             value="Back"
             @click.prevent="goBack"
           />
           <input
             v-if="state.value !== 'twelve'"
-            class="submissionButton"
+            class="btn"
             type="button"
             value="Next"
             @click.prevent="goForward"
           />
           <input
             v-if="state.value == 'twelve'"
-            class="submissionButton"
+            class="btn"
             type="button"
             value="Submit"
             @click.prevent="persistFirebase"
@@ -152,20 +153,43 @@ export default {
 <style scoped>
 .contender {
   background-color: #151515;
+  width: 60vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .contenderPic {
-  height: 10rem;
+  max-height: 12rem;
+}
+h1 {
+  margin: 0;
 }
 input[type="file"] {
   border: 0;
   padding: 0;
 }
-label {
-  font-size: 12px;
-  display: block;
-  margin-top: 30px;
+.selector-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 100%;
 }
-button {
-  margin-top: 20px;
+label {
+  font-size: 3rem;
+}
+.option {
+  width: 60vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5rem;
+  padding: 0.5rem;
+}
+.btn {
+  margin: 20px;
+  padding: 1rem 4rem;
 }
 </style>

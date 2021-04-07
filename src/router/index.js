@@ -3,7 +3,7 @@ import Home from "../views/Home.vue";
 import Login from "../views/auth/Login.vue";
 import Signup from "../views/auth/Signup.vue";
 import CreatePlaylist from "../views/playlists/CreatePlaylist.vue";
-import PlaylistDetails from "../views/playlists/PlaylistDetails.vue";
+import FullPrediction from "../views/playlists/FullPrediction.vue";
 import UserPredictions from "../views/playlists/UserPredictions.vue";
 import MakePredictions from "../views/MakePredictions.vue";
 
@@ -44,8 +44,8 @@ const routes = [
   //path: '/wwe/:toUrl/wrestlemania',
   {
     path: "/wwe/:toUrl/wrestlemania",
-    name: "PlaylistDetails",
-    component: PlaylistDetails,
+    name: "FullPrediction",
+    component: FullPrediction,
     props: true,
     beforeEnter: requireAuth,
   },

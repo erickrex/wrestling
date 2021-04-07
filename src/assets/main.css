@@ -21,6 +21,8 @@
 }
 body {
   background: var(--primary);
+  margin: 0;
+  padding: 0;
 }
 a {
   text-decoration: none;
@@ -52,7 +54,7 @@ button:disabled {
 
 /* forms */
 form {
-  max-width: 400px;
+  max-width: 500px;
   margin: 0 auto;
   padding: 30px;
   border-radius: 8px;

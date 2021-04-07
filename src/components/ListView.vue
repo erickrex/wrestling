@@ -2,16 +2,15 @@
   <div v-for="singleprediction in predictions" :key="singleprediction.id">
     <router-link
       :to="{
-        name: 'PlaylistDetails',
+        name: 'FullPrediction',
         params: { toUrl: singleprediction.userName, id: singleprediction.id },
       }"
     >
       <div class="single">
-        <p>
+        <h3 class="prediction-title">
           {{ singleprediction.ppv }} picks by
           <span>{{ singleprediction.userName }}</span>
-        </p>
-        <h2>{{ singleprediction.userName }}</h2>
+        </h3>
         <p>
           <span>{{
             singleprediction.predictions["WWE Championship Match"]
@@ -77,5 +76,8 @@ span {
 }
 .song-number {
   margin-left: auto;
+}
+.prediction-title {
+  margin-bottom: 0.7rem;
 }
 </style>

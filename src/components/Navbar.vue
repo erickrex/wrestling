@@ -7,10 +7,10 @@
       </h1>
       <div class="links">
         <div v-if="user">
-          <router-link :to="{ name: 'MakePredictions' }"
+          <router-link :to="{ name: 'MakePredictions' }" class="btn"
             >Pick Winners!</router-link
           >
-          <router-link :to="{ name: 'UserPredictions' }"
+          <router-link :to="{ name: 'UserPredictions' }" class="btn"
             >My Predictions</router-link
           >
 
@@ -23,7 +23,9 @@
       </div>
     </nav>
     <div class="hello">
-      <span v-if="user" class="btn">Welcome {{ user.displayName }}!</span>
+      <span v-if="user" class="btn"
+        >Welcome {{ user.displayName }}! See profile</span
+      >
     </div>
   </div>
 </template>
@@ -50,15 +52,18 @@ export default {
 
 <style scoped>
 .navbar {
-  padding: 16px 10px;
-  margin-bottom: 60px;
+  padding: 10px;
+  margin-bottom: 20px;
   background: black;
+}
+.links {
+  padding-right: 0;
+  padding-left: auto;
 }
 nav {
   display: flex;
   align-items: center;
   max-width: 1200px;
-  margin: 0 auto;
 }
 nav img {
   max-height: 10vw;
@@ -68,24 +73,26 @@ nav h1 {
 }
 nav .links {
   width: 100%;
-  margin-left: auto;
+  margin-left: 8rem;
 }
 
 nav .links a,
 button {
   margin: 0.5rem;
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: bold;
 }
 
 nav .links a:hover,
 button:hover {
   color: red;
-  font-size: 1.5rem;
+  font-size: 1.1rem;
 }
 
 .hello {
-  margin: 0 30vw;
-  font-size: 1.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.4rem;
 }
 </style>

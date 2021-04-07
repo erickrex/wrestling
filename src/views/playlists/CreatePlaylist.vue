@@ -57,7 +57,7 @@ export default {
         //Redirect to see the Playlist
         if (!error.value) {
           router.push({
-            name: "PlaylistDetails",
+            name: "FullPrediction",
             params: { id: res.id, toUrl: res.userName },
           });
         }
