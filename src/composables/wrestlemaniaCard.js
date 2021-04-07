@@ -115,7 +115,7 @@ const Card = createMachine(
         },
         on: {
           NEXT: { target: "eight" },
-          PREVIOUS: { target: "six" },
+          PREVIOUS: { target: "sixB" },
         },
       },
       eight: {
@@ -180,7 +180,7 @@ const Card = createMachine(
         },
         on: {
           NEXT: { target: "elevenB" },
-          PREVIOUS: { target: "ten" },
+          PREVIOUS: { target: "tenB" },
         },
       },
       elevenB: {
@@ -198,8 +198,8 @@ const Card = createMachine(
       },
       twelve: {
         meta: {
-          match: "Great, see you at Wrestlemania",
-          optionsAvailable: [{ wrestler: "Alexa Bliss", status: "" }],
+          match: "Great! See you at",
+          optionsAvailable: [{ wrestler: "Wrestlemania", status: "" }],
         },
         on: {
           PREVIOUS: { target: "elevenB" },

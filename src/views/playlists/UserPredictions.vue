@@ -12,6 +12,7 @@ import getUser from "@/composables/getUser";
 import getCollection from "@/composables/getCollection";
 import ListView from "@/components/ListView.vue";
 export default {
+  props: ["toUrl"],
   components: { ListView },
   setup() {
     const { user } = getUser();
@@ -20,7 +21,7 @@ export default {
       "==",
       user.value.uid,
     ]);
-
+    console.log();
     return { predictions, user };
   },
 };

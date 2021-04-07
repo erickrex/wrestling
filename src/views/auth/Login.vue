@@ -29,7 +29,7 @@ export default {
     const handleSubmit = async () => {
       const res = await login(email.value, password.value);
       if (!error.value) {
-        router.push({ name: "UserPredictions" });
+        router.push({ name: "UserPredictions", params: { toUrl: res.user } });
       }
     };
     return { email, password, handleSubmit, error, isPending };

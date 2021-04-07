@@ -5,27 +5,31 @@
       <h2>{{ currentMatch.match }}</h2>
       <form class="contender">
         <div
-          class="option"
+          class="selection-wrapper"
           v-for="(optionsAvailable, index) in state.meta[`step.${state.value}`]
             .optionsAvailable"
           :key="optionsAvailable.wrestler"
         >
-          <h2>{{ optionsAvailable.wrestler }}</h2>
-          <input
-            type="radio"
-            :value="optionsAvailable.wrestler"
-            v-model="picked"
-            :name="state.meta[`step.${state.value}`].match"
-            validation="required"
-            class="contenderSelect"
-          />
-
-          <img
-            :src="
-              require(`@/assets/${currentMatch.optionsAvailable[index].wrestler}.png`)
-            "
-            class="contenderPic"
-          />
+          <label class="selected-label">
+            <h2>{{ optionsAvailable.wrestler }}</h2>
+            <input
+              type="radio"
+              :value="optionsAvailable.wrestler"
+              v-model="picked"
+              :name="currentMatch.match"
+              validation="required"
+              class="contenderSelect"
+            />
+            <span class="icon"></span>
+            <div class="selected-content">
+              <img
+                :src="
+                  require(`@/assets/${currentMatch.optionsAvailable[index].wrestler}.png`)
+                "
+                class="contenderPic"
+              />
+            </div>
+          </label>
         </div>
 
         <div class="submitQuestion">
@@ -159,16 +163,11 @@ export default {
   justify-content: center;
   align-items: center;
 }
-.contenderPic {
-  max-height: 12rem;
-}
+
 h1 {
   margin: 0;
 }
-input[type="file"] {
-  border: 0;
-  padding: 0;
-}
+
 .selector-container {
   display: flex;
   flex-direction: column;
@@ -177,10 +176,10 @@ input[type="file"] {
   max-width: 100%;
 }
 label {
-  font-size: 3rem;
+  font-size: 1.2rem;
 }
 .option {
-  width: 60vw;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -191,5 +190,39 @@ label {
 .btn {
   margin: 20px;
   padding: 1rem 4rem;
+}
+.selected-content {
+  text-align: center;
+  border-radius: 3px;
+  box-shadow: 0 2px 3px 0 rgba(219, 157, 21, 0.884);
+  border: solid 4px transparent;
+
+  transition: 0.3s ease-in-out all;
+}
+
+.selected-content img {
+  height: 15rem;
+  margin: 0 auto;
+}
+
+.selected-label {
+  position: relative;
+}
+.selected-label input {
+  display: none;
+}
+.selected-label input:checked {
+  background: #5b5d61;
+  border: solid 2px var(--pornyellow);
+  transform: scale(1.2);
+}
+.selected-label input:checked {
+  color: var(--pornyellow);
+  opacity: 1;
+  transform: scale(0.5);
+}
+.selected-label input:checked ~ .selected-content {
+  box-shadow: 10px 10px 10px 0 rgba(233, 179, 33, 0.5);
+  border: solid 4px var(--pornyellow);
 }
 </style>

@@ -50,7 +50,7 @@ const routes = [
     beforeEnter: requireAuth,
   },
   {
-    path: "/predictions/user",
+    path: "/mypredictions/",
     name: "UserPredictions",
     component: UserPredictions,
     beforeEnter: requireAuth,
