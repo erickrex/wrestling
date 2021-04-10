@@ -1,6 +1,7 @@
 <template>
   <div class="home">
     <div v-if="error" class="error">Could not fetch the data</div>
+    <img src="@/assets/wrestlingpredictions.jpg" class="hero" />
     <div v-if="documents">
       <ListView :predictions="documents" />
     </div>
@@ -22,3 +23,15 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.hero {
+  width: 100%;
+}
+</style>

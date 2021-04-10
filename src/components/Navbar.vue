@@ -1,24 +1,36 @@
 <template>
   <div class="navbar">
     <nav>
-      <img src="@/assets/logo.png" />
-      <h1>
-        <router-link :to="{ name: 'Home' }">Wrestling Predictions</router-link>
-      </h1>
+      <div class="navbar-container">
+        <img src="@/assets/logo.png" />
+        <h1>
+          <router-link :to="{ name: 'Home' }"
+            >Wrestling Predictions</router-link
+          >
+        </h1>
+      </div>
       <div class="links">
-        <div v-if="user">
-          <router-link :to="{ name: 'MakePredictions' }" class="btn"
-            >Pick Winners!</router-link
-          >
-          <router-link :to="{ name: 'UserPredictions' }" class="btn"
-            >My Predictions</router-link
-          >
+        <div class="links-container" v-if="user">
+          <div class="btn">
+            <router-link :to="{ name: 'MakePredictions' }"
+              >Pick Winners!</router-link
+            >
+          </div>
+          <div class="btn">
+            <router-link :to="{ name: 'UserPredictions' }"
+              >My Predictions</router-link
+            >
+          </div>
 
-          <button @click="handleClick">Logout</button>
+          <div class="btn"><a @click="handleClick">Logout</a></div>
         </div>
         <div v-else>
-          <router-link class="btn" :to="{ name: 'Signup' }">Signup</router-link>
-          <router-link class="btn" :to="{ name: 'Login' }">Login</router-link>
+          <div class="btn">
+            <router-link :to="{ name: 'Signup' }">Signup</router-link>
+          </div>
+          <div class="btn">
+            <router-link :to="{ name: 'Login' }">Login</router-link>
+          </div>
         </div>
       </div>
     </nav>
@@ -56,6 +68,11 @@ export default {
   margin-bottom: 20px;
   background: black;
 }
+.navbar-container {
+  display: flex;
+  align-items: center;
+  padding: 1rem 0;
+}
 .links {
   padding-right: 0;
   padding-left: auto;
@@ -63,8 +80,16 @@ export default {
 nav {
   display: flex;
   align-items: center;
+  margin: auto;
+  justify-content: space-between;
   max-width: 1200px;
 }
+.links-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
 nav img {
   max-height: 10vw;
 }
@@ -73,14 +98,23 @@ nav h1 {
 }
 nav .links {
   width: 100%;
-  margin-left: 8rem;
+  margin-bottom: 2rem;
 }
 
 nav .links a,
 button {
-  margin: 0.5rem;
   font-size: 1rem;
   font-weight: bold;
+}
+.btn {
+  padding: 0.7rem;
+  margin: 0 1rem;
+  width: 10rem;
+  text-align: center;
+}
+
+.btn a {
+  color: black;
 }
 
 nav .links a:hover,
@@ -94,5 +128,28 @@ button:hover {
   justify-content: center;
   align-items: center;
   font-size: 1.4rem;
+}
+
+.hello .btn {
+  width: 100%;
+  max-width: 1240px;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 728px) {
+  nav {
+    flex-direction: column;
+  }
+  .links-container {
+    justify-content: center;
+    align-items: center;
+  }
+  nav .links a,
+  button {
+    text-align: center;
+    vertical-align: middle !important;
+    font-size: 0.7rem;
+  }
 }
 </style>

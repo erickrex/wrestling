@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="!existingpredictions">
     <div class="selector-container">
       <h1>Pick your winners</h1>
       <h2>{{ currentMatch.match }}</h2>
@@ -57,17 +57,21 @@
         </div>
       </form>
     </div>
+    <div v-for="docu in documents" :key="docu.id">
+      <p>{{ docu.ppv }}</p>
+    </div>
   </div>
 </template>
 
 <script>
-import { ref, watchEffect } from "vue";
+import { ref, watchEffect, computed, onMounted, toRefs } from "vue";
 import useCollection from "@/composables/useCollection";
 import { timestamp } from "@/firebase/config";
 import { useRouter } from "vue-router";
 import getUser from "@/composables/getUser";
 import Card from "@/composables/wrestlemaniaCard";
 import { useMachine } from "@xstate/vue";
+import getCollection from "../composables/getCollection";
 
 export default {
   name: "MakePredictions",
@@ -81,8 +85,15 @@ export default {
     const option = ref("");
     let userPrediction = {};
     const currentMatch = ref({});
-    const picture = ref("");
 
+    //FIX after wrestlemania
+    // if (documents.value !== null && documents.value !== undefined) {
+    //   alreadyHavePrediction.value = true;
+    // } else {
+    //   alreadyHavePrediction.value = false;
+    // }
+    //const { value } = documents;
+    // console.log(alreadyHavePrediction.value);
     //extracting each single match for better manipulation
     watchEffect(() => {
       currentMatch.value = {
@@ -90,9 +101,24 @@ export default {
         optionsAvailable:
           state.value.meta[`step.${state.value.value}`].optionsAvailable,
       };
-      console.log(currentMatch.value.optionsAvailable[0].wrestler);
     });
     //hold state of picked winner when going back and forth
+    const { documents } = getCollection("predictions", [
+      "userId",
+      "==",
+      user.value.uid,
+    ]);
+
+    console.log(documents.data());
+    const existingPredictions = computed(() => {
+      if (documents.value) {
+        return true;
+      } else return false;
+    });
+    onMounted(() => {
+      console.log("mounted!");
+    });
+
     watchEffect(() => {
       if (userPrediction[`${currentMatch.value.match}`])
         picked.value = userPrediction[`${currentMatch.value.match}`];
@@ -149,6 +175,8 @@ export default {
       currentMatch,
       persistFirebase,
       isPending,
+      documents,
+      existingPredictions,
     };
   },
 };
@@ -196,7 +224,6 @@ label {
   border-radius: 3px;
   box-shadow: 0 2px 3px 0 rgba(219, 157, 21, 0.884);
   border: solid 4px transparent;
-
   transition: 0.3s ease-in-out all;
 }
 
