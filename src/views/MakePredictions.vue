@@ -109,7 +109,6 @@ export default {
       user.value.uid,
     ]);
 
-    console.log(documents.data());
     const existingPredictions = computed(() => {
       if (documents.value) {
         return true;

@@ -21,7 +21,7 @@ export default {
       "==",
       user.value.uid,
     ]);
-    console.log();
+
     return { predictions, user };
   },
 };

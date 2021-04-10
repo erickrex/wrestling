@@ -11,26 +11,25 @@
       </div>
       <div class="links">
         <div class="links-container" v-if="user">
-          <div class="btn">
-            <router-link :to="{ name: 'MakePredictions' }"
-              >Pick Winners!</router-link
-            >
-          </div>
-          <div class="btn">
-            <router-link :to="{ name: 'UserPredictions' }"
-              >My Predictions</router-link
-            >
-          </div>
+          <router-link :to="{ name: 'MakePredictions' }"
+            ><div class="btn">Pick Winners!</div></router-link
+          >
 
-          <div class="btn"><a @click="handleClick">Logout</a></div>
+          <router-link :to="{ name: 'UserPredictions' }"
+            ><div class="btn">My Predictions</div></router-link
+          >
+
+          <a @click="handleClick"><div class="btn">Logout</div></a>
         </div>
+
         <div v-else>
-          <div class="btn">
-            <router-link :to="{ name: 'Signup' }">Signup</router-link>
-          </div>
-          <div class="btn">
-            <router-link :to="{ name: 'Login' }">Login</router-link>
-          </div>
+          <router-link :to="{ name: 'Signup' }"
+            ><div class="btn">Signup</div></router-link
+          >
+
+          <router-link :to="{ name: 'Login' }"
+            ><div class="btn">Login</div></router-link
+          >
         </div>
       </div>
     </nav>
@@ -115,12 +114,6 @@ button {
 
 .btn a {
   color: black;
-}
-
-nav .links a:hover,
-button:hover {
-  color: red;
-  font-size: 1.1rem;
 }
 
 .hello {
