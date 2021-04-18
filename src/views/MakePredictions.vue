@@ -109,13 +109,21 @@ export default {
       user.value.uid,
     ]);
 
+    //documents.value.json().then((converted) => console.log(converted));
+
+    //documents.then((data) => console.log(data.json()));
     const existingPredictions = computed(() => {
-      if (documents.value) {
+      if (documents) {
+        console.log("JA");
         return true;
-      } else return false;
+      } else {
+        console.log("NEIN");
+        return false;
+      }
     });
+    console.log(existingPredictions.value);
     onMounted(() => {
-      console.log("mounted!");
+      console.log(documents.value.value);
     });
 
     watchEffect(() => {
